@@ -252,7 +252,10 @@ echo $str;
 echo '<br><br> ----- 15.  транслит <br>';
 
 $str = 'русский текст';
-echo mb_detect_encoding($str);
+echo translit($str),'<br>';
+$str_en = 'russkij tekst';
+echo translit($str_en),'<br>';
+echo translit(translit($str)); /// для теста
 function translit($str)
 {
     if (empty($str)) {
@@ -261,25 +264,35 @@ function translit($str)
     $len = mb_strlen($str) - 1;
     $str = mb_strtolower($str);
     $translit = '';
-    $arr_rus = ['', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'];
-    $arr_en = ['', 'a', 'b', 'v', 'g', 'd', 'e', 'yo', 'zh', 'z', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'w', '#', 'y', "'", 'je', 'ju', 'ja'];
+    $arr_rus = [' ', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'];
+    $arr_en = [' ', 'a', 'b', 'v', 'g', 'd', 'e', 'yo', 'zh', 'z', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'w', '#', 'y', "'", 'je', 'ju', 'ja'];
 
     if (mb_detect_encoding($str) == 'UTF-8') { // if russian
         for ($i = 0; $i <= $len; $i++) {
+            $str_mb= mb_substr($str,$i,1);
             foreach ($arr_rus as $key => $val) {
+                if ($str_mb == $val) {
+                    $translit .= $arr_en[$key];
+                    break;
+                }
             }
         }
-            //$translit.=
-        }
-    else{   /// if english
+    } else {   /// if english
+        $translit = str_replace($arr_en,$arr_rus,$str);
 
-        }
     }
-
+    return $translit;
+}
 
 
 
 //////////////////////Работа с explode, implode
+/*
+16. Дана строка 'я учу PHP!'. С помощью функции explode запишите каждое слово этой строки в отдельный элемент массива.
+ */
+
+
+
 /*
 17. Дан массив с элементами 'html', 'css', 'php', 'js'. С помощью функции implode создайте строку из этих элементов, разделенных запятыми.
 */
