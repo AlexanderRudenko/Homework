@@ -397,24 +397,48 @@ echo $str;
 */
 echo '<br><br> ----- 27. Дана строка \'Мама мыла раму\'. Узнайте количество букв \'a\' и \'м\', входящих в эту строку.<br>';
 
-
-
+$str = 'Mama mila ramy';
+echo 'string - ', $str, ' -  contains: <br>';
+echo 'a - ', substr_count($str,'a'),'<br>';
+echo 'i - ', substr_count($str,'i'),'<br>';
+echo 'm - ', substr_count($str,'m'),'<br>';
 /*
 28. Скопируйте весь текст со страницы php.su, запишите его в переменную $str. Подсчитайте количество символов и количество слов в даннной строке.
 */
+echo '<br><br> ----- 28. Подсчитайте количество символов и количество слов в даннной строке.<br>';
+
+$str = 'This will handle a string where it is unknown if comma or period are used as thousand or decimal separator. Only exception where this leads to a conflict is when there is only a single comma or period and 3 possible decimals (123.456 or 123,456). An optional parameter is passed to handle this case (assume thousands, assume decimal, decimal when period, decimal when comma). It assumes an input string in any of the formats listed below.';
+
+echo  'words - ',str_word_count($str),'<br>';
+print_r(count_chars($str,0));
 
 
 /*
 29. Создайте массив гласных букв. С помощью этого массива подсчитайте количество гласных в строке $str. Результат представьте в виде ассоциативного массива, где ключами будут буквы, а элементами их количество.
 */
+echo '<br><br> ----- 29. Создайте массив гласных букв. С помощью этого массива подсчитайте количество гласных в строке $str.<br>';
+$arr_vowels = ['a', 'e', 'i', 'o', 'u'];
 
+foreach ($arr_vowels as $value){
+    $arr_symbol[$value]= substr_count($str,$value);
+}
+    print_r($arr_symbol);
 /*
 30. Дана строка '1234567890'. Разбейте ее на массив с элементами '12', '34', '56', '78', '90'.
 */
+echo '<br><br> ----- 30. Дана строка \'1234567890\'. Разбейте ее на массив с элементами \'12\', \'34\', \'56\', \'78\', \'90\'.<br>';
+$str = '1234567890';
+$arr_str = str_split($str,2);
+
+print_r($arr_str);
+
 ////////////////////Работа с str_repeat, strrev
 /*
 31. Проверьте, является ли пара слов палиндромом (одинаково читается во всех направлениях, кот-ток, нос-сон).
 */
+echo '<br><br> ----- 31. Проверьте, является ли пара слов палиндромом (одинаково читается во всех направлениях, кот-ток, нос-сон).<br>';
+
+
 
 /*
 32. Дан массив $arr. Найдите в нем все пары слов-палиндромов (одинаково читаются во всех направлениях, кот-ток, нос-сон). Результат выводите в виде строка формата 'нос — сон'. Проверьте работу скрипта на массиве $arr из примера. Совет: нужно сделать не один, а два цикла.
