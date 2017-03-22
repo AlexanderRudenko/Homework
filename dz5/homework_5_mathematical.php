@@ -237,21 +237,22 @@ echo $average;
 */
 echo '<br><br> ----- 18. Напишите скрипт-калькулятор единого налога.   <br>';
 
-function single_tax($zp, $stavka){
+function single_tax($zp, $stavka)
+{
     if (empty($zp) or empty($stavka)) {
         return 0;
     }
-if($zp < (30*$stavka)){
-        return 'Ваш налог '. $stavka;
-}
-else{$stavka += ($zp-30*$stavka)*0.05;
-    return 'Ваш налог '. $stavka;
-}
+    if ($zp < (30 * $stavka)) {
+        return 'Ваш налог ' . $stavka;
+    } else {
+        $stavka += ($zp - 30 * $stavka) * 0.05;
+        return 'Ваш налог ' . $stavka;
+    }
 }
 
-echo single_tax(1000,30);
+echo single_tax(1000, 30);
 echo '<br>';
-echo single_tax(20,30);
+echo single_tax(20, 30);
 /*
 19. Напишите скрипт-калькулятор оплаты за электроэнергию.
 Сумма считается так: если вы потратили за месяц менее 150 киловатт,
@@ -260,21 +261,22 @@ echo single_tax(20,30);
 */
 echo '<br><br> ----- 19. Напишите скрипт-калькулятор оплаты за электроэнергию.  <br>';
 
-function electric ($kw_m){
-    if (empty($kw_m)){
+function electric($kw_m)
+{
+    if (empty($kw_m)) {
         return 0;
     }
     $sum1 = 1;
     $sum2 = 2;
     $sum3 = 3;
-    if($kw_m<=149){
-        $sum_full = $kw_m*$sum1;
+    if ($kw_m <= 149) {
+        $sum_full = $kw_m * $sum1;
         return $sum_full;
-    } else if($kw_m<=299){
-        $sum_full = 149*$sum1+($kw_m-149)*$sum2;
+    } else if ($kw_m <= 299) {
+        $sum_full = 149 * $sum1 + ($kw_m - 149) * $sum2;
         return $sum_full;
-    }else{
-        $sum_full = 149*$sum1+150*$sum2+($kw_m-299)*$sum3;
+    } else {
+        $sum_full = 149 * $sum1 + 150 * $sum2 + ($kw_m - 299) * $sum3;
         return $sum_full;
     }
 }
@@ -290,46 +292,44 @@ echo electric(500);
 */
 echo '<br><br> ----- 20. Напишите скрипт, который найдет все простые числа в заданном промежутке.  <br>';
 
-function primes($start, $end){
-    if(empty($start) or empty($end)){
+function primes($start, $end)
+{
+    if (empty($start) or empty($end)) {
         return 0;
     }
-    $primes =array();
-    while ($start <= $end){
-        if(is_float($start/2)){
-            $primes[]=$start;
+    $primes = array();
+    while ($start <= $end) {
+        if (is_float($start / 2)) {
+            $primes[] = $start;
         }
         $start++;
     }
     return $primes;
 }
-$primes = primes(1,1000);
-echo "<pre>";
-var_dump($primes);
-echo "</pre>";
+
+$primes = primes(1, 1000);
+
+print_r($primes);
 /*
 21. Напишите скрипт, который будет находить тройки целых чисел, удовлетворяющих теореме Пифагора.
 */
 echo '<br><br> ----- 21. Напишите скрипт, который будет находить тройки целых чисел, удовлетворяющих теореме Пифагора.  <br>';
 
-function pifagor_rand ($start, $end){
-    if(empty($start) or empty($end)){
+function pifagor_rand($rand)
+{
+    if ($rand <= 1) {
         return 0;
     }
-    $pif_side=array();
-    while() {
-        $pif_side['katet1'] = rand($start, $end);
-        $pif_side['katet2'] = rand($start, $end);
-        $pif_side['gipotenuza'] = sqrt($pif_side['katet1'] ** 2 + $pif_side['katet2'] ** 2);
-        if(is_float($pif_side['gipotenuza'])){
-            continue;
-        }
-    }
+    $pif_side = array();
+    $m = rand(2, $rand);
+    $pif_side['katet1'] = ($m * 2) ** 2;
+    $pif_side['katet2'] = ($m ** 2 - 1) ** 2;
+    $pif_side['gipotenuza'] = ($m ** 2 + 1) ** 2;
     return $pif_side;
 
 }
 
-$side = pifagor_rand(1,100);
+$side = pifagor_rand(2);
 
 echo "<pre>";
 var_dump($side);
