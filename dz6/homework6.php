@@ -53,8 +53,17 @@ if (!empty($_POST['date1'])) {
 По этому timestamp узнайте день недели (словом, латиницей) и выведите его на экран.
 */
 echo '<br><br> ----- 2. Сравнить две даты, для большей,	узнайте день недели (словом, латиницей) и выведите его на экран <br>';
-if (!empty($_POST['date1']) and !empty($_POST['date2'] )){
-
+if (!empty($_POST['date1']) and !empty($_POST['date2'])){
+    $date1= explode('-', $_POST['date1']);
+    $date2= explode('-', $_POST['date2']);
+    $date1_nx = mktime(0,0,0,$date1[1],$date1[0],$date1[2]);
+    $date2_nx = mktime(0,0,0,$date2[2],$date2[0],$date2[1]);
+    if(($date1_nx-$date2_nx)<=0){
+        echo $_POST['date1'].' date is longer. Day of the week - ' .date('l',$date1_nx);
+    }
+    else{
+        echo $_POST['date2'].' date is longer. Day of the week - ' .date('l',$date2_nx);
+    }
 }
 /*
 3.	В поле вводится дата. Прибавьте к этой дате 1 год 2 месяца и 3 дня. Отнимите от этой даты 5 дней. Результат преобразуйте ее в выбранный формат и отобразите на экране.
